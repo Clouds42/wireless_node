@@ -29,6 +29,7 @@
 #include "rf24g.h"
 #include "rf24g2.h"
 #include "stdio.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,11 +70,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t ADC_Data[16]={"Hello\r\n"};
-uint8_t receive_buff[32];
-uint32_t start_time = 0;
-uint32_t end_time = 0;
-uint32_t elapsed_cycles = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -125,21 +122,39 @@ int main(void)
   while (NRF24L02_Check());
   printf("NRF24L02 OK!\r\n");
   NRF24L02_RX_Mode();
+
+  uint8_t transmit_data[16]={"REQ"};
+  uint8_t receive_buff[32];
+  uint8_t n = 0;
+  uint8_t flag = 1; // 收到数据为1，超时未收到数据为0
+  uint32_t start_time = 0;
+  uint32_t end_time = 0;
+  uint32_t elapsed_cycles = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  __HAL_TIM_SET_COUNTER(&htim1, 0);
-	  start_time = __HAL_TIM_GET_COUNTER(&htim1);
-	  NRF24L01_TxPacket_Data((uint8_t *)ADC_Data, 32);
-	  while (NRF24L02_RxPacket(receive_buff) != 0 || reveive_buff != "A0REQ");
-	  end_time = __HAL_TIM_GET_COUNTER(&htim1);
-	  elapsed_cycles = end_time - start_time;
-//	  HAL_TIM_Base_Stop(&htim1);
-//	  printf("Elapsed cycles: %lu\n", elapsed_cycles);
-	  printf("%lu\n", elapsed_cycles);
+	  flag = 1;
+	  __HAL_TIM_SET_COUNTER(&htim1, 0); // 计时器归零
+	  start_time = __HAL_TIM_GET_COUNTER(&htim1); // 记录发送前的时钟刻
+	  NRF24L01_TxPacket_Data((uint8_t *)transmit_data, 32); // 发送数据
+	  while (NRF24L02_RxPacket(receive_buff) != 0 || strcmp((char *)receive_buff, "ACK") != 0) // 未收到数据或数据并非期望的字段
+	  {
+		  if (n++ > 99) // 99个时钟刻后仍然没有收到数据或收到指定数据，则判定为超时，不记录时间并跳出循环，进行下一次发送（重发）
+		  {
+			  flag = 0;
+			  printf("0\n");
+			  break;
+		  }
+	  }
+	  if (flag) // 只有收到有效数据才计时
+	  {
+		  end_time = __HAL_TIM_GET_COUNTER(&htim1); // 记录接收到有效数据的时钟刻
+		  elapsed_cycles = end_time - start_time;
+		  printf("%lu\n", elapsed_cycles);
+	  }
 	  HAL_Delay(50);
     /* USER CODE END WHILE */
 

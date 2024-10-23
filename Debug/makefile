@@ -61,8 +61,8 @@ all: main-build
 main-build: Wireless_Node.elf secondary-outputs
 
 # Tool invocations
-Wireless_Node.elf Wireless_Node.map: $(OBJS) $(USER_OBJS) C:\Users\jiangyan\Downloads\wireless_node\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Wireless_Node.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\jiangyan\Downloads\wireless_node\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Wireless_Node.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Wireless_Node.elf Wireless_Node.map: $(OBJS) $(USER_OBJS) D:\wireless_node\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Wireless_Node.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\wireless_node\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Wireless_Node.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

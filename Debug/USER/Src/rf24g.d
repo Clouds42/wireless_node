@@ -1,5 +1,4 @@
-USER/Src/rf24g.o: ../USER/Src/rf24g.c \
- C:/Users/jiangyan/Downloads/wireless_node/USER/Inc/rf24g.h \
+USER/Src/rf24g.o: ../USER/Src/rf24g.c D:/wireless_node/USER/Inc/rf24g.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -31,7 +30,7 @@ USER/Src/rf24g.o: ../USER/Src/rf24g.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-C:/Users/jiangyan/Downloads/wireless_node/USER/Inc/rf24g.h:
+D:/wireless_node/USER/Inc/rf24g.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
