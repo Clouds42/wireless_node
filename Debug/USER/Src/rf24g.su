@@ -1,0 +1,11 @@
+../USER/Src/rf24g.c:23:9:SPIx_ReadWriteByte	32	static
+../USER/Src/rf24g.c:39:9:NRF24L01_Check	16	static
+../USER/Src/rf24g.c:58:9:NRF24L01_Write_Reg	24	static
+../USER/Src/rf24g.c:75:9:NRF24L01_Read_Reg	24	static
+../USER/Src/rf24g.c:92:9:NRF24L01_Read_Buf	32	static
+../USER/Src/rf24g.c:113:9:NRF24L01_Write_Buf	24	static
+../USER/Src/rf24g.c:134:9:NRF24L01_TxPacket	24	static
+../USER/Src/rf24g.c:164:9:NRF24L01_TxPacket_Data	24	static
+../USER/Src/rf24g.c:194:9:NRF24L01_RxPacket	24	static
+../USER/Src/rf24g.c:215:6:NRF24L01_RX_Mode	8	static
+../USER/Src/rf24g.c:239:6:NRF24L01_TX_Mode	8	static
